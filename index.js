@@ -37,5 +37,5 @@ const getUser2FullName = getFullName.bind(user2, 'PHP');
 const user1FullName = getUser1FullName('Unit testing');
 const user2FullName = getUser2FullName('Yii');
 
-console.log(user1FullName);
-console.log(user2FullName);
+console.log(user1FullName); // Serhii Khrapin - JS, Unit testing
+console.log(user2FullName); // Petro Petrenko - PHP, Yii
