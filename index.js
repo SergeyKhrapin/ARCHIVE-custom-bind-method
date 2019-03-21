@@ -21,22 +21,21 @@ function bind(context, ...stack) {
 	// Add to that object 'fn' method equals to 'this' (getFullName function)
 	user.fn = this;
 
-	function option_1() {
-		return user.fn(...stack);
+	function invokeMethod(...params) {
+		// Create an array which includes both ...stack and ...params arguments (in order to allow 'currying')
+		const paramsArray = stack.concat(params);
+
+		return user.fn(...paramsArray);
 	}
 
-	function option_2(...args) {
-		return user.fn(...args);
-	}
-
-	return stack.length ? option_1 : option_2;
+	return invokeMethod;
 }
 
-const getUser1FullName = getFullName.bind(user1); // option 1
-const getUser2FullName = getFullName.bind(user2, 'PHP', 'Yii'); // option 2
+const getUser1FullName = getFullName.bind(user1, 'JS');
+const getUser2FullName = getFullName.bind(user2, 'PHP');
 
-const user1FullName = getUser1FullName('JS', 'Unit testing');
-const user2FullName = getUser2FullName();
+const user1FullName = getUser1FullName('Unit testing');
+const user2FullName = getUser2FullName('Yii');
 
 console.log(user1FullName);
 console.log(user2FullName);
